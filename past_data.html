@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Past Recorded Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1A2D3B;
+            color: #949999;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #949999;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #1A2D3B;
+            color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+            color: #960B0B;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #960B0B;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Past Recorded Data for {{ patient.username }}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Temperature (°C)</th>
+                    <th>Heart Rate (bpm)</th>
+                    <th>SpO2 (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for measurement in past_measurements %}
+                <tr>
+                    <td>{{ measurement.date }}</td>
+                    <td>{{ measurement.time }}</td>
+                    <td>{{ measurement.temperature }}</td>
+                    <td>{{ measurement.heart_rate }}</td>
+                    <td>{{ measurement.spo2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

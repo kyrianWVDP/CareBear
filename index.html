@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Care Bear - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            background-color: #1A2D3B; /* Main background color */
+            color: #949999; /* Text color */
+        }
+        .navbar {
+            background-color: #960B0B; /* Navbar background color */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 20px 25px; /* Smaller padding to reduce navbar size */
+        }
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-container {
+            margin-top: 100px; /* Ensure content is not covered by the navbar */
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #949999; /* Container background color */
+            color: #1A2D3B; /* Text color for containers */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 4rem;
+            color: #1A2D3B; /* White text color */
+        }
+        .header a {
+            background-color: #ffffff; /* Button background color */
+            color: #960B0B; /* Button text color */
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: #f4f4f4; /* Light gray hover background */
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 2rem;
+            color: #1A2D3B; /* Text color */
+        }
+        .section p, .section ul {
+            font-size: 1.25rem;
+            color: #1A2D3B; /* Text color */
+        }
+        .section img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="text-white text-4xl font-bold">Care Bear</h1>
+            <div>
+                <a href="/login" class="bg-white text-#960B0B py-2 px-4 rounded mx-1 hover:bg-gray-100">Iniciar Sesión</a>
+                <a href="/register" class="bg-white text-#960B0B py-2 px-4 rounded mx-1 hover:bg-gray-100">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <section class="container my-8 p-6">
+            <h2 class="text-3xl font-bold mb-4">¿Qué es Care Bear?</h2>
+            <img src="{{ url_for('static', filename='images/image_small.jpeg') }}" alt="Care Bear Prototype" class="fade-in">
+            <p class="text-xl leading-relaxed">
+                Care Bear es un prototipo de seguidor médico, que con ayuda de un sensor de temperatura corporal y un sensor 
+                de ritmo cardiaco y oxigenación de la sangre monitoreará al paciente de forma constante. Además, será capaz 
+                de cargar estos datos recopilados a una interfaz web que podrá ser accesible para el médico y el paciente.
+            </p>
+        </section>
+
+        <section class="container my-8 p-6">
+            <h2 class="text-3xl font-bold mb-4">¿Quiénes somos?</h2>
+            <ul class="text-xl list-disc list-inside">
+                <li>Evelyn Rales</li>
+                <li>Ana Samaniego</li>
+                <li>Adriana Villamayor</li>
+                <li>Kyrian Weiss</li>
+            </ul>
+        </section>
+
+        <section class="container my-8 p-6">
+            <h2 class="text-3xl font-bold mb-4">Objetivos</h2>
+            <div class="mb-6">
+                <div class="flex space-x-4">
+                    <img src="{{ url_for('static', filename='images/image_small2.jpeg') }}" alt="Care Bear Prototype 2" class="fade-in">
+                    <img src="{{ url_for('static', filename='images/image_small3.jpeg') }}" alt="Care Bear Prototype 3" class="fade-in">
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Objetivo general</h3>
+                <p class="text-xl leading-relaxed">
+                    Desarrollar un sistema de recopilación de datos con sensores de temperatura, ritmo cardiaco y oxigenación 
+                    de la sangre que ayude a los doctores a llevar un monitoreo de la salud, además, otorgando a los usuarios 
+                    un recordatorio de los medicamentos a consumir.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Objetivos específicos</h3>
+                <ul class="text-xl list-disc list-inside">
+                    <li>Diseñar un prototipo de muñequera donde se encontrarán los sensores.</li>
+                    <li>Diseñar la estructura de CareBear con éxito.</li>
+                    <li>Investigar y utilizar correctamente los sensores.</li>
+                    <li>Implementar una página web capaz de registrar datos médicos del usuario y ser visualizados por el médico.</li>
+                    <li>Finalizar con éxito la programación que cumpla los requisitos de Care Bear.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="container my-8 p-6">
+            <h2 class="text-3xl font-bold mb-4">Contacto</h2>
+            <p class="text-xl">Número de teléfono: 0985 724135</p>
+            <p class="text-xl">Instituto Paraguayo de Telecomunicaciones</p>
+        </section>
+    </div>
+
+    <script>
+        // Ensure images have fade-in effect when they are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                element.classList.add('visible');
+            });
+        });
+    </script>
+</body>
+</html>

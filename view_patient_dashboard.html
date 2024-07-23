@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Dashboard (View Only)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            background-color: #1A2D3B; /* Main background color */
+            color: #949999; /* Text color */
+        }
+        nav {
+            background-color: #960B0B; /* Navbar background color */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 20px 25px; /* Smaller padding to reduce navbar size */
+        }
+        .navbar-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-container {
+            margin-top: 100px; /* Ensure content is not covered by the navbar */
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #949999; /* Container background color */
+            color: #1A2D3B; /* Text color for containers */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <nav>
+        <div class="navbar-container">
+            <h1 class="text-white text-2xl font-bold">Care Bear</h1>
+            <div>
+                <a href="/logout" class="bg-white text-red-500 py-2 px-4 rounded mx-1 hover:bg-gray-100">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container my-8 p-6">
+            <h1 class="text-4xl font-bold mb-4 text-center">Patient Dashboard</h1>
+            <p class="text-xl mb-4 text-center">Viewing data for {{ patient.username }}</p>
+
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Patient's Alarms</h2>
+                <ul class="space-y-4">
+                    {% for alarm in alarms %}
+                    <li class="p-4 bg-gray-100 rounded-md shadow flex justify-between items-center">
+                        <div>
+                            <span class="block text-lg">{{ alarm.time }}</span>
+                            <span class="block text-sm text-gray-600">{{ alarm.label }}</span>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="text-gray-600">No alarms set.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-4">Patient's Measurements</h2>
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 border-b">Measurement</th>
+                        <th class="py-2 px-4 border-b">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for measurement in measurements %}
+                    <tr>
+                        <td class="py-2 px-4 border-b">Temperature (°C)</td>
+                        <td class="py-2 px-4 border-b">{{ measurement.temperature }} °C</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">Heart Rate (bpm)</td>
+                        <td class="py-2 px-4 border-b">{{ measurement.heart_rate }} bpm</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">SpO2 (%)</td>
+                        <td class="py-2 px-4 border-b">{{ measurement.spo2 }} %</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="py-2 px-4 border-b" colspan="2">No measurements available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

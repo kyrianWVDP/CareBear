@@ -1,0 +1,72 @@
+/* General styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+/* Hero section styles */
+.hero-bg {
+    background-color: #3b82f6; /* Tailwind's blue-500 */
+    color: white;
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.hero-bg h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-bg p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Navbar styles */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: #3b82f6; /* Tailwind's blue-500 */
+    color: white;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 1rem;
+}
+
+.bg-custom-blue {
+    background-color: #3b82f6; /* Tailwind's blue-500 */
+}
+
+.text-custom-blue {
+    color: #3b82f6; /* Tailwind's blue-500 */
+}
+
+/* Centering form in full height */
+.full-height-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 4rem; /* Adjust for fixed navbar */
+}

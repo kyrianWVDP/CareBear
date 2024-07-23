@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            background-color: #1A2D3B; /* Main background color */
+            color: #949999; /* Text color */
+        }
+        nav {
+            background-color: #960B0B; /* Navbar background color */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 20px 25px; /* Smaller padding to reduce navbar size */
+        }
+        .navbar-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-container {
+            margin-top: 100px; /* Ensure content is not covered by the navbar */
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #949999; /* Container background color */
+            color: #1A2D3B; /* Text color for containers */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #ffffff; /* White text color */
+        }
+        .header a {
+            background-color: #ffffff; /* Button background color */
+            color: #960B0B; /* Button text color */
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: #f4f4f4; /* Light gray hover background */
+        }
+        .custom-button {
+            background-color: #1A2D3B;
+        }
+        .custom-button:hover {
+            background-color: #3A4E5B;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userTypeField = document.getElementById('user_type');
+            const patientFields = document.getElementById('patient_fields');
+            const doctorFields = document.getElementById('doctor_fields');
+            const form = document.querySelector('form');
+            const patientIdInput = document.getElementById('patient_id');
+            const doctorIdInput = document.getElementById('doctor_id');
+
+            userTypeField.addEventListener('change', function () {
+                if (this.value === 'patient') {
+                    patientFields.classList.remove('hidden');
+                    doctorFields.classList.add('hidden');
+                } else if (this.value === 'doctor') {
+                    patientFields.classList.add('hidden');
+                    doctorFields.classList.remove('hidden');
+                } else {
+                    patientFields.classList.add('hidden');
+                    doctorFields.classList.add('hidden');
+                }
+            });
+
+            // Trigger change event to set initial visibility
+            userTypeField.dispatchEvent(new Event('change'));
+
+            form.addEventListener('submit', function (event) {
+                if (userTypeField.value === 'patient' && !isValidId(patientIdInput.value)) {
+                    event.preventDefault();
+                    alert('Please enter a valid Patient ID.');
+                } else if (userTypeField.value === 'doctor' && !isValidId(doctorIdInput.value)) {
+                    event.preventDefault();
+                    alert('Please enter a valid Doctor ID.');
+                }
+            });
+
+            function isValidId(id) {
+                // Example validation: numeric, longer than 5 digits, not a stream of 0s
+                const idPattern = /^[1-9][0-9]{5,}$/;
+                return idPattern.test(id);
+            }
+        });
+    </script>
+</head>
+<body class="font-sans">
+    <nav>
+        <div class="navbar-container">
+            <h1 class="text-white text-4xl font-bold">Care Bear</h1>
+            <div>
+                <a href="{{ url_for('login') }}" class="bg-white py-2 px-4 rounded mx-1 hover:bg-gray-100" style="color: #960B0B;">Iniciar Sesión</a>
+                <a href="{{ url_for('register') }}" class="bg-white py-2 px-4 rounded mx-1 hover:bg-gray-100" style="color: #960B0B;">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container my-8 p-6">
+            <h1 class="text-2xl font-bold mb-4">Register</h1>
+            <form method="POST" action="{{ url_for('register') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-4">
+                    {{ form.username.label(class_="block text-customBlue") }}
+                    {{ form.username(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.email.label(class_="block text-customBlue") }}
+                    {{ form.email(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.password.label(class_="block text-customBlue") }}
+                    {{ form.password(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.confirm_password.label(class_="block text-customBlue") }}
+                    {{ form.confirm_password(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                </div>
+                <div class="mb-4">
+                    {{ form.user_type.label(class_="block text-customBlue") }}
+                    {{ form.user_type(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                </div>
+                <div id="patient_fields" class="mb-4 hidden">
+                    <div class="mb-4">
+                        <label for="patient_id" class="block text-customBlue">Patient ID</label>
+                        <input type="text" id="patient_id" name="patient_id" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+                <div id="doctor_fields" class="mb-4 hidden">
+                    <div class="mb-4">
+                        <label for="doctor_id" class="block text-customBlue">Doctor ID</label>
+                        <input type="text" id="doctor_id" name="doctor_id" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        {{ form.medical_credentials.label(class_="block text-customBlue") }}
+                        {{ form.medical_credentials(class_="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500") }}
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-2 px-4 rounded-md text-white focus:outline-none custom-button">Register</button>
+            </form>
+            <p class="mt-4 text-sm">Already have an account? <a href="{{ url_for('login') }}" style="color: #960B0B;">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>
